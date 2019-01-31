@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 import './simple.css';
 
 
@@ -50,9 +51,10 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
+        var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: this.state.pwd
+            pwd: hash
         })
             .then(function (response) {
                 console.log(response.data);

@@ -5,7 +5,7 @@ class Tool extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logged_user: [{ Username:" "}]
+            logged_user: (JSON.parse(sessionStorage.getItem("Account")))
         }
     }
 
@@ -13,8 +13,8 @@ class Tool extends Component {
         if(JSON.parse(sessionStorage.getItem("Account")) === null){
             return(<h3 className="container center-align" > This is a Restricted Page, you must log in to access this page content</h3>)
          }
-        console.log(JSON.parse(sessionStorage.getItem("Account")));
-        console.log(JSON.stringify(sessionStorage.getItem("Account")));
+        console.log(this.state.logged_user);
+        console.log(JSON.stringify(this.state.logged_user));
         return (
                 <div className="col s7" className="container">
                      {/* <h4>Username : {this.props.logged_user.userName}</h4>
