@@ -3,6 +3,9 @@ import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import './simple.css';
+import Delete from "./Delete"
+import Update from "./Update"
+
 
 
 
@@ -26,9 +29,12 @@ class Form extends Component {
 
     LoginFunction = (e) => {
         e.preventDefault();
+        
+        
         axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
             .then(response => {
                 let accounts = response.data;
+                
                 for (let account = 0; account < accounts.length; account++) {
                     if ((this.state.userName === accounts[account].userName) &&
                         (this.state.pwd === accounts[account].pwd)) {
@@ -51,10 +57,10 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
-        var hash = bcrypt.hashSync(this.state.pwd, 10);
+        // var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: hash
+            pwd: this.state.pwd
         })
             .then(function (response) {
                 console.log(response.data);
@@ -66,24 +72,9 @@ class Form extends Component {
                 console.log(error);
             });
     }
-
-    deleteFuntion = () => {
-        axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/'+ JSON.parse(sessionStorage.getItem("Account")).userName)
-            .then(function (response) {
-                console.log(response.data);
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            this.props.history.push("/");
-    }
-
-
-
     resetSeesion = () => {
         sessionStorage.clear();
-        this.props.history.push("/Form");
+        this.props.history.push("/");
     }
 
     render() {
@@ -112,8 +103,8 @@ class Form extends Component {
                 <button onClick={this.resetSeesion} className="btn blue lighten-1" type="submit">Logout</button>
                 <div className="container">
                     <div className="row">
-                        <a href="#" onClick={this.deleteFuntion} className="col s6">Delete Account</a>
-                        <a href="#" className="col s6"> Update Password</a>
+                    <Delete resetSeesion={this.resetSeesion} className="col s6" />
+                    <Update  className="col s6" />
                     </div>
                 </div>
             </div>

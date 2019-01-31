@@ -13,8 +13,6 @@ class Tool extends Component {
         if(JSON.parse(sessionStorage.getItem("Account")) === null){
             return(<h3 className="container center-align" > This is a Restricted Page, you must log in to access this page content</h3>)
          }
-        // console.log(this.state.logged_user);
-        // console.log(JSON.stringify(this.state.logged_user));
         return (
                 <div className="col s7" className="container">
                      {(this.state.logged_user.notes.reverse().map((note) =>

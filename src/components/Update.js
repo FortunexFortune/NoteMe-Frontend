@@ -1,12 +1,64 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 
 class Update extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formIsHiden: true,
+      userName: null,
+      pwd: null,
+      message:null,
+    }
+  }
+
+  inputHandle = (e) => {
+    this.setState({
+        [e.target.id]: e.target.value
+    });
+}
+
+  updatedFunction = () => {
+    console.log("Updated Function has been triggered",JSON.parse(sessionStorage.getItem("Account")).userName);
+    axios.post('http://localhost:8080/SpeedMe_Backend/api/account/updateAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName
+      , {
+        userName: this.state.userName,
+        pwd: this.state.pwd
+      })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  displayForm = () => {
+    this.setState({
+      formIsHiden: !this.state.formIsHiden
+  });
+
+  }
 
   render() {
     return (
-        <div>
-        </div>
+      <div>
+        <a href="#" onClick={this.displayForm} className="col s6"> Update Password</a>
+        <br></br>
+        <br></br>
+        <br></br>
+        {this.state.formIsHiden ? null :
+          <form onSubmit={this.updatedFunction} className="form_size ">
+            <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
+            <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" required />
+            <button className="btn blue lighten-1" type="submit">Update</button>
+          </form>}
+          {this.state.message}
+
+      </div>
 
     );
   }
