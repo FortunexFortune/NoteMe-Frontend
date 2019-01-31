@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom'
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 import './simple.css';
 import Delete from "./Delete"
 import Update from "./Update"
@@ -29,12 +28,11 @@ class Form extends Component {
 
     LoginFunction = (e) => {
         e.preventDefault();
-        
-        
+
+
         axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
-            .then(response => {
+            .then((response) => {
                 let accounts = response.data;
-                
                 for (let account = 0; account < accounts.length; account++) {
                     if ((this.state.userName === accounts[account].userName) &&
                         (this.state.pwd === accounts[account].pwd)) {
@@ -57,16 +55,16 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
-        // var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
             pwd: this.state.pwd
         })
-            .then(function (response) {
+            .then((response) => {
                 console.log(response.data);
                 this.setState({
-                    message: response.data
+                    message: response.data.message
                 });
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -78,7 +76,6 @@ class Form extends Component {
     }
 
     render() {
-        console.log(JSON.parse(sessionStorage.getItem("Account")));            
         if (JSON.parse(sessionStorage.getItem("Account")) === null) {
 
             return (
@@ -87,7 +84,7 @@ class Form extends Component {
                     <br></br>
                     <p className="post card"> {this.state.message}</p>
                     <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
-                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" required />
+                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4"  required />
                     <button onClick={this.LoginFunction} className="btn blue lighten-1" >Login</button>
                     <button onClick={this.registerFuncion} className="btn blue lighten-1" >Register</button>
                     <p><NavLink to="">Forgot Password?</NavLink></p>
@@ -103,8 +100,8 @@ class Form extends Component {
                 <button onClick={this.resetSeesion} className="btn blue lighten-1" type="submit">Logout</button>
                 <div className="container">
                     <div className="row">
-                    <Delete resetSeesion={this.resetSeesion} className="col s6" />
-                    <Update  className="col s6" />
+                        <Delete resetSeesion={this.resetSeesion} className="col s6" />
+                        <Update className="col s6" />
                     </div>
                 </div>
             </div>

@@ -5,16 +5,7 @@ import axios from 'axios';
 
 
 class Delete extends Component {
-    constructor() {
-        super();
-        this.state = {
-            logged_user: null,
-            loginStatus: false,
-            userName: null,
-            pwd: null,
-            message: null,
-        }
-    }
+    
 
     deleteFuntion = () => {
         axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
