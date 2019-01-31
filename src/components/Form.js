@@ -76,17 +76,7 @@ class Form extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-     = () => {
-        axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/'+ JSON.parse(sessionStorage.getItem("Account")).userName)
-            .then(function (response) {
-                console.log(response.data);
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            this.props.history.push("/");
     }
 
 
@@ -94,7 +84,6 @@ class Form extends Component {
     resetSeesion = () => {
         sessionStorage.clear();
         this.props.history.push("/Form");
-        
     }
 
     render() {
@@ -121,8 +110,6 @@ class Form extends Component {
                 <p>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
                 <br></br>
                 <button onClick={this.resetSeesion} className="btn blue lighten-1" type="submit">Logout</button>
-
-
                 <div className="container">
                     <div className="row">
                         <a href="#" onClick={this.deleteFuntion} className="col s6">Delete Account</a>
