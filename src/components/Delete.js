@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom'
-
 import axios from 'axios';
+import { Button, Icon, Modal } from 'react-materialize'
+
 
 
 class Delete extends Component {
-    
+    constructor() {
+        super();
+        this.state = {
+            id: null,
+        }
+    }
+
+    inputHandle = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        });
+    }
+
+
 
     deleteFuntion = () => {
         axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
@@ -15,13 +29,21 @@ class Delete extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-            this.props.resetSeesion();
+        this.props.resetSeesion();
     }
+
+
 
     render() {
         return (
-            <div>
-                <a href="" onClick={this.deleteFuntion} className="col s6">Delete Account</a>
+            <div >
+                <Modal
+                    header='Delete Account'
+                    trigger={<a className="waves-effect waves-light  modal-trigger center-align" href="#modal1">Delete Account</a>}>
+                    <p>Once you delete a Account, there is no going back. Please be certain.</p>
+                        <p>All your Account infomration and notes will be completly erased from out database.</p>
+                        <button data-target="modal1" onClick={this.deleteFuntion} className="btn red darken-1">  Yes Delete!! </button>
+                </Modal>
             </div>
         );
     }

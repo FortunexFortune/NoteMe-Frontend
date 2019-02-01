@@ -75,19 +75,20 @@ class Form extends Component {
         this.props.history.push("/");
     }
 
+
+    
+
     render() {
         if (JSON.parse(sessionStorage.getItem("Account")) === null) {
-
             return (
                 <div className="container form_size">
                     <br></br>
                     <br></br>
                     <p className="post card"> {this.state.message}</p>
                     <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
-                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4"  required />
+                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4" required />
                     <button onClick={this.LoginFunction} className="btn blue lighten-1" >Login</button>
                     <button onClick={this.registerFuncion} className="btn blue lighten-1" >Register</button>
-                    <p><NavLink to="">Forgot Password?</NavLink></p>
                 </div>
             )
         }
@@ -99,9 +100,10 @@ class Form extends Component {
                 <br></br>
                 <button onClick={this.resetSeesion} className="btn blue lighten-1" type="submit">Logout</button>
                 <div className="container">
-                    <div className="row">
-                        <Delete resetSeesion={this.resetSeesion} className="col s6" />
-                        <Update className="col s6" />
+                    <div>
+                        <br></br>
+                        <Delete resetSeesion={this.resetSeesion} />
+                        <Update />
                     </div>
                 </div>
             </div>
