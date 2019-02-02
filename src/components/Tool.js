@@ -4,6 +4,7 @@ import CreateNote from "./CreateNote"
 import UpdateNote from "./UpdateNote"
 import DeleteNote from "./DeleteNote"
 import axios from 'axios';
+import light from './light.png'
 
 
 
@@ -32,8 +33,6 @@ class Tool extends Component {
         });
     }
 
-
-
     render() {
         if (JSON.parse(sessionStorage.getItem("Account")) === null) {
             return (<h3 className="container center-align" > This is a Restricted Page, you must log in to access this page content</h3>)
@@ -41,7 +40,7 @@ class Tool extends Component {
         return (
 
             <div className="container">
-                <h4 className="center-align" >Logged User : {this.state.logged_user.userName}</h4>
+                <h4 className="center-align" >Logged User : {this.state.logged_user.userName.toUpperCase()}</h4>
 
                 <div className="row">
                     <div className="col s1">
@@ -57,6 +56,7 @@ class Tool extends Component {
 
                 {(this.state.logged_user.notes.reverse().map((note) =>
                     <div className="post card" key={note.noteID}>
+                        {/* <img className="lightImg" src={light}/> */}
                         <div className="card-content" >
                             <span className="card-title">  <b> Title : {note.title} </b></span>
                             <span className="card-title"> <em>ID</em> : {note.noteID} <b /> </span>

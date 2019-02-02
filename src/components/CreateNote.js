@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Icon, Modal } from 'react-materialize'
+import { Button, Modal } from 'react-materialize'
 import axios from 'axios';
-
-
 
 class CreateNote extends Component {
     constructor() {
@@ -13,7 +11,6 @@ class CreateNote extends Component {
             logged_user: JSON.parse(sessionStorage.getItem("Account")).userName
         }
     }
-
 
     inputHandle = (e) => {
         this.setState({
@@ -47,11 +44,6 @@ class CreateNote extends Component {
             });
     }
 
-
-   
-
-
-
     render() {
         return (
             <div>
@@ -68,12 +60,8 @@ class CreateNote extends Component {
                         {/* <p> {this.state.message}</p> */}
                         <br></br>
                     </form>
-
                 </Modal>
-
-
             </div>
-
         );
     }
 }

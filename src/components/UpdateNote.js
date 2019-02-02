@@ -45,7 +45,6 @@ class UpdateNote extends Component {
 
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 <Modal

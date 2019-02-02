@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { NavLink, withRouter } from 'react-router-dom'
-import { Button, Icon, Modal } from 'react-materialize'
-
-
+import {  withRouter } from 'react-router-dom'
+import {  Modal } from 'react-materialize'
 
 class Update extends Component {
   constructor(props) {
@@ -14,9 +12,7 @@ class Update extends Component {
       message: null,
     }
   }
-
-
-
+  
   inputHandle = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -46,10 +42,9 @@ class Update extends Component {
   render() {
     return (
       <div >
-
         <Modal
           header='Update Password'
-          trigger={<a href="#" onClick={this.displayForm} className="col s6"> Update Password</a>}>
+          trigger={<a href="/" onClick={this.displayForm} className="col s6"> Update Password</a>}>
           <form onSubmit={this.updatedFunction} className="form_size ">
             <p>Insert Your UserName and new password below</p>
             <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
@@ -60,14 +55,9 @@ class Update extends Component {
             <br></br>
           </form>
         </Modal>
-
-
-
-
       </div>
 
     );
   }
 }
-
 export default withRouter(Update);

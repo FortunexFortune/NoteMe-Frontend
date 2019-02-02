@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios';
-import { Button, Icon, Modal } from 'react-materialize'
-
-
+import { Modal } from 'react-materialize'
 
 class Delete extends Component {
     constructor() {
@@ -19,8 +17,6 @@ class Delete extends Component {
         });
     }
 
-
-
     deleteFuntion = () => {
         axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
             .then(function (response) {
@@ -31,8 +27,6 @@ class Delete extends Component {
             });
         this.props.resetSeesion();
     }
-
-
 
     render() {
         return (

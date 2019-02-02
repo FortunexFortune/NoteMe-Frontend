@@ -6,9 +6,31 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+    
+  .Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .Site-content {
+    flex: 1;
+  }
+  
+

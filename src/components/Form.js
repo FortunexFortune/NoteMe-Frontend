@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios';
 import './simple.css';
 import Delete from "./Delete"
 import Update from "./Update"
-
-
+import bcrypt from 'bcryptjs';
+import load from './load.gif'
 
 
 class Form extends Component {
@@ -28,8 +28,6 @@ class Form extends Component {
 
     LoginFunction = (e) => {
         e.preventDefault();
-
-
         axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
             .then((response) => {
                 let accounts = response.data;
@@ -55,9 +53,10 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
+        var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: this.state.pwd
+            pwd: hash
         })
             .then((response) => {
                 console.log(response.data);
@@ -74,9 +73,6 @@ class Form extends Component {
         sessionStorage.clear();
         this.props.history.push("/");
     }
-
-
-    
 
     render() {
         if (JSON.parse(sessionStorage.getItem("Account")) === null) {
@@ -106,6 +102,7 @@ class Form extends Component {
                         <Update />
                     </div>
                 </div>
+
             </div>
         );
     }

@@ -17,9 +17,6 @@ class DeleteNote extends Component {
         });
     }
 
-
-
-    
     deleteFunction = (e) => {
         e.preventDefault();
         axios.delete("http://localhost:8080/SpeedMe_Backend/api/note/deleteNote/" + this.state.id)
@@ -35,26 +32,6 @@ class DeleteNote extends Component {
                 console.log(error);
             });
     }
-
-
-    updateNote =()=>{
-        axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
-        .then((response) => {
-            let accounts = response.data;
-            for (let account = 0; account < accounts.length; account++) {
-                if ((JSON.parse(sessionStorage.getItem("Account")).userName === accounts[account].userName)){
-                    sessionStorage.removeItem("Account");
-                    sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
-                    console.log("update took place")
-                }
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
-
-
 
     render() {
         console.log(this.state.id);
@@ -75,5 +52,4 @@ class DeleteNote extends Component {
         );
     }
 }
-
 export default DeleteNote;
