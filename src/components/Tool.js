@@ -56,7 +56,6 @@ class Tool extends Component {
 
                 {(this.state.logged_user.notes.reverse().map((note) =>
                     <div className="post card" key={note.noteID}>
-                        {/* <img className="lightImg" src={light}/> */}
                         <div className="card-content" >
                             <span className="card-title">  <b> Title : {note.title} </b></span>
                             <span className="card-title"> <em>ID</em> : {note.noteID} <b /> </span>
