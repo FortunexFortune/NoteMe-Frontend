@@ -4,7 +4,6 @@ import CreateNote from "./CreateNote"
 import UpdateNote from "./UpdateNote"
 import DeleteNote from "./DeleteNote"
 import axios from 'axios';
-import light from './light.png'
 
 
 

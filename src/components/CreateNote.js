@@ -20,7 +20,6 @@ class CreateNote extends Component {
 
     createNoteFunction = (e) => {
         e.preventDefault(); 
-
         let d = Date(Date.now()); 
         let currentDate = d.toString() 
 
@@ -57,7 +56,6 @@ class CreateNote extends Component {
                         <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="content" id="content" required />
                         <button className="btn green lighten-1" type="submit">Create</button>
                         <br></br>
-                        {/* <p> {this.state.message}</p> */}
                         <br></br>
                     </form>
                 </Modal>

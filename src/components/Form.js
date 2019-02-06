@@ -53,10 +53,10 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
-        var hash = bcrypt.hashSync(this.state.pwd, 10);
+        // var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: hash
+            pwd: this.state.pwd
         })
             .then((response) => {
                 console.log(response.data);
