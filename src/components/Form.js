@@ -82,10 +82,14 @@ class Form extends Component {
                     <br></br>
                     <br></br>
                     <p className="post card"> {this.state.message}</p>
+
+                    
+                    <form>
                     <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
                     <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4" required />
                     <button onClick={this.LoginFunction} className="btn blue lighten-1" >Login</button>
                     <button onClick={this.registerFuncion} className="btn blue lighten-1" >Register</button>
+                    </form>
                 </div>
             )
         }
