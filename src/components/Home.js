@@ -4,12 +4,13 @@ import image2 from './image2.png'
 import image3 from './image3.png'
 import image4 from './image4.png'
 import image5 from './image5.png'
-
 import {  Carousel } from 'react-materialize'
+import * as constants from "./constants.js";
 
 class Home extends Component {
 
   render() {
+    console.log(constants.static_IP);
     return (
       <div className="container">
         <h4 className="center"> Home  </h4>

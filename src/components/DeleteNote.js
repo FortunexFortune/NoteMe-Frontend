@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'react-materialize'
 import axios from 'axios';
+import * as constants from "./constants.js";
+
 
 
 class DeleteNote extends Component {
@@ -24,7 +26,7 @@ class DeleteNote extends Component {
         for (let note = 0; note < notes.length; note++) {
             console.log(notes[note].noteID);
             if (parseInt(this.state.id) === parseInt(notes[note].noteID)) {
-                axios.delete("http://localhost:8080/SpeedMe_Backend/api/note/deleteNote/" + this.state.id)
+                axios.delete(constants.static_IP + ":8080/SpeedMe_Backend/api/note/deleteNote/" + this.state.id)
                     .then((response) => {
                         console.log(response.data);
                         this.setState({

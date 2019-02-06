@@ -4,6 +4,7 @@ import CreateNote from "./CreateNote"
 import UpdateNote from "./UpdateNote"
 import DeleteNote from "./DeleteNote"
 import axios from 'axios';
+import * as constants from "./constants.js";
 
 
 
@@ -16,7 +17,7 @@ class Tool extends Component {
     }
 
     updateAccountInfo =()=>{
-        axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
+        axios.get(constants.static_IP+":8080/SpeedMe_Backend/api/account/getAllAccounts")
         .then((response) => {
             let accounts = response.data;
             for (let account = 0; account < accounts.length; account++) {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Icon, Modal } from 'react-materialize'
 import axios from 'axios';
+import * as constants from "./constants.js";
+
 
 
 class UpdateNote extends Component {
@@ -30,7 +32,7 @@ class UpdateNote extends Component {
 
                 let d = Date(Date.now());
                 let currentDate = d.toString()
-                axios.post("http://localhost:8080/SpeedMe_Backend/api/note/updateNote/" + this.state.id, {
+                axios.post(constants.static_IP + ":8080/SpeedMe_Backend/api/note/updateNote/" + this.state.id, {
                     title: this.state.title,
                     content: this.state.content,
                     date: currentDate,

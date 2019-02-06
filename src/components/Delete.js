@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
 import { Modal } from 'react-materialize'
+import * as constants from "./constants.js";
+
 
 class Delete extends Component {
     constructor() {
@@ -18,7 +20,7 @@ class Delete extends Component {
     }
 
     deleteFuntion = () => {
-        axios.delete('http://localhost:8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
+        axios.delete(constants.static_IP + ':8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
             .then(function (response) {
                 console.log(response.data);
             })

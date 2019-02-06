@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {  withRouter } from 'react-router-dom'
 import {  Modal } from 'react-materialize'
+import * as constants from "./constants.js";
+
 
 class Update extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class Update extends Component {
   updatedFunction = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8080/SpeedMe_Backend/api/account/updateAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName
+    axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/updateAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName
       , {
         userName: this.state.userName,
         pwd: this.state.pwd

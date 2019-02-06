@@ -5,7 +5,8 @@ import './simple.css';
 import Delete from "./Delete"
 import Update from "./Update"
 import bcrypt from 'bcryptjs';
-import load from './load.gif'
+import * as constants from "./constants.js";
+
 
 
 class Form extends Component {
@@ -28,7 +29,7 @@ class Form extends Component {
 
     LoginFunction = (e) => {
         e.preventDefault();
-        axios.get("http://localhost:8080/SpeedMe_Backend/api/account/getAllAccounts")
+        axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAllAccounts")
             .then((response) => {
                 let accounts = response.data;
                 for (let account = 0; account < accounts.length; account++) {
@@ -54,7 +55,7 @@ class Form extends Component {
 
     registerFuncion = () => {
         // var hash = bcrypt.hashSync(this.state.pwd, 10);
-        axios.post('http://localhost:8080/SpeedMe_Backend/api/account/createAccount', {
+        axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
             pwd: this.state.pwd
         })

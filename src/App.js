@@ -6,6 +6,7 @@ import Form from "./components/Form"
 import Tool from "./components/Tool"
 import Footer from "./components/Footer"
 import { BrowserRouter, Route } from 'react-router-dom'
+
 class App extends Component {
 
   render() {
@@ -25,7 +26,6 @@ class App extends Component {
             <Footer />
           </footer>
         </body>
-
       </BrowserRouter>
 
     );
