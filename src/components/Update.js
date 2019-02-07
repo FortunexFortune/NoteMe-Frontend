@@ -50,7 +50,7 @@ class Update extends Component {
           <form onSubmit={this.updatedFunction} className="form_size ">
             <p>Insert Your UserName and new password below</p>
             <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
-            <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4" required />
+            <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minLength="4" required />
             <button className="btn green lighten-1" type="submit">Update</button>
             <br></br>
             <p> {this.state.message}</p>

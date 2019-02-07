@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, CollapsibleItem, Collapsible } from 'react-materialize'
+import { CollapsibleItem, Collapsible } from 'react-materialize'
 
 const About = () => {
 

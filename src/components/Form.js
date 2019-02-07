@@ -4,14 +4,13 @@ import axios from 'axios';
 import './simple.css';
 import Delete from "./Delete"
 import Update from "./Update"
-import bcrypt from 'bcryptjs';
 import * as constants from "./constants.js";
-
+// import bcrypt from 'bcryptjs';
 
 
 class Form extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             logged_user: null,
             loginStatus: false,
@@ -27,8 +26,7 @@ class Form extends Component {
         });
     }
 
-    LoginFunction = (e) => {
-        e.preventDefault();
+    LoginFunction = () => {
         axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAllAccounts")
             .then((response) => {
                 let accounts = response.data;
@@ -55,6 +53,7 @@ class Form extends Component {
 
     registerFuncion = () => {
         // var hash = bcrypt.hashSync(this.state.pwd, 10);
+
         axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
             pwd: this.state.pwd
@@ -65,11 +64,16 @@ class Form extends Component {
                     message: response.data.message
                 });
 
+                if (response.data.message === "account has been sucessfully added") {
+                    this.LoginFunction();
+                }
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
+
+
     resetSeesion = () => {
         sessionStorage.clear();
         this.props.history.push("/");
@@ -82,14 +86,10 @@ class Form extends Component {
                     <br></br>
                     <br></br>
                     <p className="post card"> {this.state.message}</p>
-
-                    
-                    <form>
                     <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
-                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minlength="4" required />
+                    <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" required />
                     <button onClick={this.LoginFunction} className="btn blue lighten-1" >Login</button>
                     <button onClick={this.registerFuncion} className="btn blue lighten-1" >Register</button>
-                    </form>
                 </div>
             )
         }

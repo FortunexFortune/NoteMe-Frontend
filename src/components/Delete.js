@@ -23,11 +23,12 @@ class Delete extends Component {
         axios.delete(constants.static_IP + ':8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
             .then(function (response) {
                 console.log(response.data);
+                
             })
             .catch(function (error) {
                 console.log(error);
             });
-        this.props.resetSeesion();
+            this.props.resetSeesion();
     }
 
     render() {

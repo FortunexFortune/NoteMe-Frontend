@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Modal } from 'react-materialize'
+import { Button, Modal } from 'react-materialize'
 import axios from 'axios';
 import * as constants from "./constants.js";
 
