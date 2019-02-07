@@ -32,7 +32,6 @@ class DeleteNote extends Component {
                         this.setState({
                             message: response.data.message
                         });
-                        this.props.updateAccountInfo();
                         window.location.reload();
                     })
                     .catch(function (error) {

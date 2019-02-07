@@ -7,6 +7,7 @@ import Tool from "./components/Tool"
 import Footer from "./components/Footer"
 import { BrowserRouter, Route } from 'react-router-dom'
 
+
 class App extends Component {
 
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <Navbar />
           </header>
           <main className="Site-content">
+
             <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Tool" render={() => <Tool component={Tool} />} />

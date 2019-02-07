@@ -40,8 +40,7 @@ class UpdateNote extends Component {
                 })
                     .then((response) => {
                         console.log(response.data);
-
-                        this.props.updateAccountInfo();
+                        
                         window.location.reload();
                     })
                     .catch(function (error) {

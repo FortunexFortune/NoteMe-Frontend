@@ -12,25 +12,31 @@ class Tool extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logged_user: (JSON.parse(sessionStorage.getItem("Account")))
+            logged_user: (JSON.parse(sessionStorage.getItem("Account"))),
+
         }
     }
 
-    updateAccountInfo =()=>{
-        axios.get(constants.static_IP+":8080/SpeedMe_Backend/api/account/getAllAccounts")
-        .then((response) => {
-            let accounts = response.data;
-            for (let account = 0; account < accounts.length; account++) {
-                if ((JSON.parse(sessionStorage.getItem("Account")).userName === accounts[account].userName)){
-                    sessionStorage.removeItem("Account");
-                    sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
-                    console.log("update took place")
+    componentDidMount(){
+        if(sessionStorage.getItem("Account") !== null){
+            axios.get(constants.static_IP+":8080/SpeedMe_Backend/api/account/getAllAccounts")
+            .then((response) => {
+                let accounts = response.data;
+                for (let account = 0; account < accounts.length; account++) {
+                    if ((JSON.parse(sessionStorage.getItem("Account")).userName === accounts[account].userName)){
+                        sessionStorage.removeItem("Account");
+                        sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
+                        this.setState({
+                            logged_user: JSON.parse(sessionStorage.getItem("Account"))
+                        });
+                        console.log("(componetDIMount) took place : ", this.state.logged_user)
+                    }
                 }
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 
     render() {

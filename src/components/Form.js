@@ -26,6 +26,7 @@ class Form extends Component {
         });
     }
 
+
     LoginFunction = () => {
         axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAllAccounts")
             .then((response) => {
@@ -34,7 +35,7 @@ class Form extends Component {
                     if ((this.state.userName === accounts[account].userName) &&
                         (this.state.pwd === accounts[account].pwd)) {
                         this.setState({
-                            logged_user: accounts[account]
+                            logged_user: accounts[account],
                         });
                         sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
                         this.props.history.push("/Tool");
@@ -52,8 +53,6 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
-        // var hash = bcrypt.hashSync(this.state.pwd, 10);
-
         axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
             pwd: this.state.pwd
