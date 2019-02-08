@@ -3,6 +3,7 @@ import axios from 'axios';
 import {  withRouter } from 'react-router-dom'
 import {  Modal } from 'react-materialize'
 import * as constants from "./constants.js";
+import bcrypt from 'bcryptjs';
 
 
 class Update extends Component {
@@ -23,11 +24,12 @@ class Update extends Component {
 
   updatedFunction = (e) => {
     e.preventDefault();
+    var hash = bcrypt.hashSync(this.state.pwd, 10);
     let userName = JSON.parse(sessionStorage.getItem("Account")).userName;
     axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/updateAccount/' + userName
       , {
         userName: this.state.userName,
-        pwd: this.state.pwd
+        pwd: hash
       })
       .then((response) => {
         console.log(response.data.message);

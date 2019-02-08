@@ -5,7 +5,7 @@ import './simple.css';
 import Delete from "./Delete"
 import Update from "./Update"
 import * as constants from "./constants.js";
-// import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 
 class Form extends Component {
@@ -31,7 +31,8 @@ class Form extends Component {
             .then((response) => {
                 let account = response.data;
                 if ((this.state.userName === account.userName) &&
-                    (this.state.pwd === account.pwd)) {
+                (bcrypt.compareSync(this.state.pwd, account.pwd)))  {
+                        
                     this.setState({
                         logged_user: account,
                     });
@@ -50,9 +51,10 @@ class Form extends Component {
     }
 
     registerFuncion = () => {
+        var hash = bcrypt.hashSync(this.state.pwd, 10);
         axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: this.state.pwd
+            pwd: hash
         })
             .then((response) => {
                 this.setState({
