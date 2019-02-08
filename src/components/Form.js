@@ -13,7 +13,6 @@ class Form extends Component {
         super(props);
         this.state = {
             logged_user: null,
-            loginStatus: false,
             userName: null,
             pwd: null,
             message: null,
@@ -28,23 +27,21 @@ class Form extends Component {
 
 
     LoginFunction = () => {
-        axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAllAccounts")
+        axios.get( constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAccount/" + this.state.userName )
             .then((response) => {
-                let accounts = response.data;
-                for (let account = 0; account < accounts.length; account++) {
-                    if ((this.state.userName === accounts[account].userName) &&
-                        (this.state.pwd === accounts[account].pwd)) {
-                        this.setState({
-                            logged_user: accounts[account],
-                        });
-                        sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
-                        this.props.history.push("/Tool");
-                    }
-                    else {
-                        this.setState({
-                            message: "You have inserted wrong credentials"
-                        });
-                    }
+                let account = response.data;
+                if ((this.state.userName === account.userName) &&
+                    (this.state.pwd === account.pwd)) {
+                    this.setState({
+                        logged_user: account,
+                    });
+                    sessionStorage.setItem("Account", JSON.stringify(account));
+                    this.props.history.push("/Tool");
+                }
+                else {
+                    this.setState({
+                        message: "You have inserted wrong credentials"
+                    });
                 }
             })
             .catch(function (error) {
@@ -58,7 +55,6 @@ class Form extends Component {
             pwd: this.state.pwd
         })
             .then((response) => {
-                console.log(response.data);
                 this.setState({
                     message: response.data.message
                 });

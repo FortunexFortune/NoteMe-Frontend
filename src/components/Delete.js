@@ -20,10 +20,9 @@ class Delete extends Component {
     }
 
     deleteFuntion = () => {
-        axios.delete(constants.static_IP + ':8080/SpeedMe_Backend/api/account/deleteAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName)
+        let userName = JSON.parse(sessionStorage.getItem("Account")).userName;
+        axios.delete(constants.static_IP + ':8080/SpeedMe_Backend/api/account/deleteAccount/' + userName)
             .then(function (response) {
-                console.log(response.data);
-                
             })
             .catch(function (error) {
                 console.log(error);

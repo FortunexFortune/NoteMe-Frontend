@@ -17,25 +17,21 @@ class Tool extends Component {
         }
     }
 
-    componentDidMount(){
-        if(sessionStorage.getItem("Account") !== null){
-            axios.get(constants.static_IP+":8080/SpeedMe_Backend/api/account/getAllAccounts")
-            .then((response) => {
-                let accounts = response.data;
-                for (let account = 0; account < accounts.length; account++) {
-                    if ((JSON.parse(sessionStorage.getItem("Account")).userName === accounts[account].userName)){
-                        sessionStorage.removeItem("Account");
-                        sessionStorage.setItem("Account", JSON.stringify(accounts[account]));
-                        this.setState({
-                            logged_user: JSON.parse(sessionStorage.getItem("Account"))
-                        });
-                        console.log("(componetDIMount) took place : ", this.state.logged_user)
-                    }
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    componentDidMount() {
+        let userName = this.state.logged_user.userName
+        if (sessionStorage.getItem("Account") !== null) {
+            axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAccount/" + userName)
+                .then((response) => {
+                    let account = response.data;
+                    sessionStorage.removeItem("Account");
+                    sessionStorage.setItem("Account", JSON.stringify(account));
+                    this.setState({
+                        logged_user: JSON.parse(sessionStorage.getItem("Account"))
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 
@@ -50,13 +46,13 @@ class Tool extends Component {
 
                 <div className="row">
                     <div className="col s1">
-                        <CreateNote updateAccountInfo={this.updateAccountInfo}/>
+                        <CreateNote updateAccountInfo={this.updateAccountInfo} />
                     </div>
                     <div className="col s1">
-                        <UpdateNote updateAccountInfo={this.updateAccountInfo}/>
+                        <UpdateNote updateAccountInfo={this.updateAccountInfo} />
                     </div>
                     <div className="col s1">
-                        <DeleteNote updateAccountInfo={this.updateAccountInfo}/>
+                        <DeleteNote updateAccountInfo={this.updateAccountInfo} />
                     </div>
                 </div>
 

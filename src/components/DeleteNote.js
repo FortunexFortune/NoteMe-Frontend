@@ -3,8 +3,6 @@ import { Button, Modal } from 'react-materialize'
 import axios from 'axios';
 import * as constants from "./constants.js";
 
-
-
 class DeleteNote extends Component {
     constructor() {
         super();
@@ -24,11 +22,9 @@ class DeleteNote extends Component {
         e.preventDefault();
         let notes = JSON.parse(sessionStorage.getItem("Account")).notes;
         for (let note = 0; note < notes.length; note++) {
-            console.log(notes[note].noteID);
             if (parseInt(this.state.id) === parseInt(notes[note].noteID)) {
                 axios.delete(constants.static_IP + ":8080/SpeedMe_Backend/api/note/deleteNote/" + this.state.id)
                     .then((response) => {
-                        console.log(response.data);
                         this.setState({
                             message: response.data.message
                         });

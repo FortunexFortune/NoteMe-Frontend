@@ -32,11 +32,9 @@ class CreateNote extends Component {
             userName : JSON.parse(sessionStorage.getItem("Account")).userName
         })
             .then((response) => {
-                console.log(response.data);
                 this.setState({
                     message: response.data.message
                 });
-                
                 window.location.reload();
             })
             .catch(function (error) {

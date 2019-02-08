@@ -23,8 +23,8 @@ class Update extends Component {
 
   updatedFunction = (e) => {
     e.preventDefault();
-
-    axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/updateAccount/' + JSON.parse(sessionStorage.getItem("Account")).userName
+    let userName = JSON.parse(sessionStorage.getItem("Account")).userName;
+    axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/updateAccount/' + userName
       , {
         userName: this.state.userName,
         pwd: this.state.pwd

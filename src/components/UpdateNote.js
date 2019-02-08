@@ -27,7 +27,6 @@ class UpdateNote extends Component {
         e.preventDefault();
         let notes = JSON.parse(sessionStorage.getItem("Account")).notes;
         for (let note = 0; note < notes.length; note++) {
-            console.log(notes[note].noteID);
             if (parseInt(this.state.id) === parseInt(notes[note].noteID)) {
 
                 let d = Date(Date.now());
@@ -39,8 +38,6 @@ class UpdateNote extends Component {
                     userName: JSON.parse(sessionStorage.getItem("Account")).userName
                 })
                     .then((response) => {
-                        console.log(response.data);
-                        
                         window.location.reload();
                     })
                     .catch(function (error) {
