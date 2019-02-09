@@ -3,7 +3,6 @@ import axios from 'axios';
 import {  withRouter } from 'react-router-dom'
 import {  Modal } from 'react-materialize'
 import * as constants from "./constants.js";
-import bcrypt from 'bcryptjs';
 
 
 class Update extends Component {
@@ -24,12 +23,11 @@ class Update extends Component {
 
   updatedFunction = (e) => {
     e.preventDefault();
-    var hash = bcrypt.hashSync(this.state.pwd, 10);
     let userName = JSON.parse(sessionStorage.getItem("Account")).userName;
     axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/updateAccount/' + userName
       , {
         userName: this.state.userName,
-        pwd: hash
+        pwd: this.state.pwd
       })
       .then((response) => {
         console.log(response.data.message);
@@ -52,7 +50,7 @@ class Update extends Component {
           <form onSubmit={this.updatedFunction} className="form_size ">
             <p>Insert Your UserName and new password below</p>
             <input className="resizedTextbox" onChange={this.inputHandle} type="text" placeholder="Username" id="userName" required />
-            <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minLength="4" required />
+            <input className="resizedTextbox" onChange={this.inputHandle} type="password" placeholder="Password" id="pwd" minLength="3" required />
             <button className="btn green lighten-1" type="submit">Update</button>
             <br></br>
             <p> {this.state.message}</p>
