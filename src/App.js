@@ -17,7 +17,6 @@ class App extends Component {
             <Navbar />
           </header>
           <main className="Site-content">
-
             <Route exact path="/" component={Home} />
             <Route path="/About" component={About} />
             <Route path="/Tool" render={() => <Tool component={Tool} />} />

@@ -12,9 +12,8 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logged_user: null,
-            userName: null,
-            pwd: null,
+            userName: "",
+            pwd: "",
             message: null,
         }
     }
@@ -27,15 +26,11 @@ class Form extends Component {
 
 
     LoginFunction = () => {
-        axios.get( constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAccount/" + this.state.userName )
+        axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAccount/" + this.state.userName)
             .then((response) => {
                 let account = response.data;
                 if ((this.state.userName === account.userName) &&
-                (bcrypt.compareSync(this.state.pwd, account.pwd)))  {
-                        
-                    this.setState({
-                        logged_user: account,
-                    });
+                    (bcrypt.compareSync(this.state.pwd, account.pwd))) {
                     sessionStorage.setItem("Account", JSON.stringify(account));
                     this.props.history.push("/Tool");
                 }
@@ -48,19 +43,36 @@ class Form extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+
     }
 
     registerFuncion = () => {
-        var hash = bcrypt.hashSync(this.state.pwd, 10);
+        //prevents any white space in the password before hashing
+        for (var i = 0; i < this.state.pwd.length; i++) {
+            if (this.state.pwd[i] === " ") {
+                return this.setState({
+                    message: "account can not be added"
+                });
+            }
+        }
+
+        //prevents empty sting password 
+        if (this.state.pwd === "") {
+            return this.setState({
+                message: "password field is empty"
+            });
+        }
+
+        let pwd = bcrypt.hashSync(this.state.pwd, 10);
         axios.post(constants.static_IP + ':8080/SpeedMe_Backend/api/account/createAccount', {
             userName: this.state.userName,
-            pwd: hash
+            pwd: pwd
         })
             .then((response) => {
+                console.log(response.data)
                 this.setState({
                     message: response.data.message
                 });
-
                 if (response.data.message === "account has been sucessfully added") {
                     this.LoginFunction();
                 }

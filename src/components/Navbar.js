@@ -28,9 +28,6 @@ class Navbar extends Component {
                     <li > {JSON.parse(sessionStorage.getItem("Account")) ? <NavLink to="/Tool">Tool</NavLink> : null}</li>
                     <li> {JSON.parse(sessionStorage.getItem("Account")) ? <NavLink to="/Form">Logout</NavLink> : <NavLink to="/Form">Login</NavLink>}</li>
                 </ul>
-
-
-        
             </div >
         );
     }
