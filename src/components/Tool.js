@@ -18,8 +18,8 @@ class Tool extends Component {
     }
 
     componentDidMount() {
-        let userName = this.state.logged_user.userName
         if (sessionStorage.getItem("Account") !== null) {
+            let userName = this.state.logged_user.userName
             axios.get(constants.static_IP + ":8080/SpeedMe_Backend/api/account/getAccount/" + userName)
                 .then((response) => {
                     let account = response.data;
